@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://deft5gpx1t23h"]
+[gd_scene load_steps=3 format=3 uid="uid://deft5gpx1t23h"]
+
+[ext_resource type="Script" uid="uid://dq3jplfqfx02j" path="res://scenes/NetNode.gd" id="1_ur44n"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7egah"]
 
 [node name="Netnode" type="Node2D"]
+script = ExtResource("1_ur44n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7egah")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7286035, 0)
+text = "node
+"
