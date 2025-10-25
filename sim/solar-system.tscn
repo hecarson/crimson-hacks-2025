@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://ryxkwgjwkxno"]
+
+[ext_resource type="Script" uid="uid://dey0wsf040u8" path="res://camera_3d.gd" id="1_2sow8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3p53v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sow8"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2sow8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj0a0"]
+
+[node name="solar system" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.70710677, -0.2740605, 0.6518366, 0, 0.9218363, 0.38757998, -0.70710677, -0.2740605, 0.6518366, 10, 5, 10)
+fov = 90.0
+script = ExtResource("1_2sow8")
+
+[node name="sun" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3p53v")
+surface_material_override/0 = SubResource("StandardMaterial3D_2sow8")
+
+[node name="earth" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.31833, 0, 0)
+mesh = SubResource("SphereMesh_2sow8")
+surface_material_override/0 = SubResource("StandardMaterial3D_cj0a0")
