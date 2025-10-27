@@ -1,6 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ryxkwgjwkxno"]
+[gd_scene load_steps=15 format=3 uid="uid://ryxkwgjwkxno"]
 
 [ext_resource type="Script" uid="uid://dey0wsf040u8" path="res://camera_3d.gd" id="1_2sow8"]
+[ext_resource type="Script" uid="uid://cefcfinxdbc5" path="res://solar_system.gd" id="1_cj0a0"]
+
+[sub_resource type="Environment" id="Environment_cj0a0"]
+background_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_3p53v"]
 
@@ -12,19 +16,95 @@ emission_energy_multiplier = 16.0
 [sub_resource type="SphereMesh" id="SphereMesh_2sow8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj0a0"]
+albedo_color = Color(3.1766297e-06, 0.58976406, 0.7958438, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5t0n"]
+albedo_color = Color(0.96781725, 0.22585306, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_cj0a0"]
+inner_radius = 6.0
+outer_radius = 6.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1kf6"]
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hygn"]
+shading_mode = 0
+
+[sub_resource type="TorusMesh" id="TorusMesh_2grus"]
+material = SubResource("StandardMaterial3D_3hygn")
+inner_radius = 8.0
+outer_radius = 8.01
+
+[sub_resource type="SphereMesh" id="SphereMesh_cj0a0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2grus"]
+albedo_color = Color(2.3584068e-06, 0.65321803, 0.3306164, 1)
 
 [node name="solar system" type="Node3D"]
+script = ExtResource("1_cj0a0")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.70710677, -0.2740605, 0.6518366, 0, 0.9218363, 0.38757998, -0.70710677, -0.2740605, 0.6518366, 10, 5, 10)
-fov = 90.0
+transform = Transform3D(0.70710677, -0.2740605, 0.6518366, 0, 0.9218363, 0.38757998, -0.70710677, -0.2740605, 0.6518366, 7.485729, 3.5050225, 7.485729)
+environment = SubResource("Environment_cj0a0")
+fov = 80.0
 script = ExtResource("1_2sow8")
 
 [node name="sun" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("SphereMesh_3p53v")
 surface_material_override/0 = SubResource("StandardMaterial3D_2sow8")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="sun"]
+omni_range = 4096.0
+omni_attenuation = 0.0
+
 [node name="earth" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.31833, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 mesh = SubResource("SphereMesh_2sow8")
 surface_material_override/0 = SubResource("StandardMaterial3D_cj0a0")
+
+[node name="mars" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+mesh = SubResource("SphereMesh_2sow8")
+skeleton = NodePath("../earth")
+surface_material_override/0 = SubResource("StandardMaterial3D_x5t0n")
+
+[node name="earth-orbit" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_t1kf6")
+
+[node name="mars-orbit" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_2grus")
+skeleton = NodePath("../earth-orbit")
+surface_material_override/0 = SubResource("StandardMaterial3D_t1kf6")
+
+[node name="relay1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_2grus")
+
+[node name="relay2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_2grus")
+
+[node name="relay3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_2grus")
+
+[node name="relay4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_2grus")
+
+[node name="relay5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_2grus")
+
+[node name="relay6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_cj0a0")
+surface_material_override/0 = SubResource("StandardMaterial3D_2grus")
